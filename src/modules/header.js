@@ -17,7 +17,7 @@ export function showTime() {
   const time = document.createElement('div');
 
   time.setAttribute('id', 'time');
-  time.textContent =  `${days[day]} ${date} ${months[month]} ${year}`;
+  time.textContent =  `${days[day-1]} ${date} ${months[month]} ${year}`;
 
   header.appendChild(time);
 }

@@ -1,5 +1,7 @@
 #sidebar {
-  font-size: 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 1px;
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -9,9 +11,10 @@
 #sidebar > div {
   margin-top: 20px;
   padding: 10px 30px;
-  border-radius: 0 100%;
+  border-radius: 0 90%;
 }
 
 #sidebar > div:hover {
+  color: rgb(155, 194, 194);
   background-color: rgb(131, 131, 131);
 }
