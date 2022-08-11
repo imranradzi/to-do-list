@@ -7,4 +7,5 @@ header {
 header > div {
   font-size: 0.5rem;
   display: flex;
+  padding: 24px;
 }

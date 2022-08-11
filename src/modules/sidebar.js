@@ -1,4 +1,6 @@
 import { sidebar } from './dom';
+import { displayTasks } from './tasks';
+import { displayNotes } from './notes';
 import '../styles/sidebar.css';
 
 function sideBtn(name, func) {
@@ -9,14 +11,8 @@ function sideBtn(name, func) {
   return div;
 }
 
-// to change
-const now = new Date();
-const dummy = () => {
-  console.log('button pressed');
-};
-
-const sideBtnArr = [sideBtn('tasks', dummy),
-              sideBtn('notes', dummy)];
+const sideBtnArr = [sideBtn('tasks', displayTasks),
+              sideBtn('notes', displayNotes)];
 
 export function displaySideBtn() {
   for (const btn of sideBtnArr) {
