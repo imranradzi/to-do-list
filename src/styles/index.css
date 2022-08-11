@@ -24,12 +24,6 @@ header {
   grid-column: 1 / -1;
 }
 
-#content > :nth-child(n) {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 #sidebar {
   background-color: rgb(78, 78, 78);
 }
