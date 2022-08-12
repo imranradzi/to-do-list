@@ -1,16 +1,67 @@
 import { mainContent } from "./dom";
 import '../styles/tasks.css';
 
+let taskArr = [];
+
 const tasksContent = document.createElement('div');
 tasksContent.setAttribute('id', 'tasks-content');;
 
-const task = (name, description) => {
+const checkCircle = () => {
+  const circle = document.createElement('div');
+  circle.classList.add('check-circle');
+
+  circle.addEventListener('click', () => {
+    if (circle.classList.contains('circle-checked')) {
+      circle.classList.remove('circle-checked');
+    } else {
+      circle.classList.add('circle-checked');
+    }
+  });
+
+  return circle;
+}
+
+function taskEdit(div) {
+  console.log(`div id is ${div.getAttribute('id')}`);
+  console.log('task edit button');
+  displayTasks();
+}
+
+function taskDelete(div) {
+  let left = taskArr.slice(0, parseInt(div.getAttribute('id')));
+  let right = taskArr.slice(parseInt(div.getAttribute('id'))+1, taskArr.length);
+  taskArr = left.concat(right);
+  displayTasks();
+}
+
+const button = (btnName, func, div) => {
+  const btn = document.createElement('img');
+  btn.setAttribute('src', `./svg/${btnName}.svg`);
+  btn.setAttribute('height', '24px');
+  btn.addEventListener('click', () => {
+    func(div);
+  });
+  
+  return btn;
+}
+
+export const task = (name, description) => {
   const div = document.createElement('div');
   div.classList.add('task');
 
+  const nameDivChild = document.createElement('div');
+  nameDivChild.textContent = name;
+
+  const taskButtons = document.createElement('div');
+  taskButtons.classList.add('task-buttons');
+  taskButtons.appendChild(button('edit', taskEdit, div));
+  taskButtons.appendChild(button('delete', taskDelete, div));
+  
   const nameDiv = document.createElement('div');
-  nameDiv.textContent = name;
   nameDiv.classList.add('task-name');
+  nameDiv.appendChild(checkCircle());
+  nameDiv.appendChild(nameDivChild);
+  nameDiv.appendChild(taskButtons);
 
   const descDiv = document.createElement('div');
   descDiv.textContent = description;
@@ -22,19 +73,28 @@ const task = (name, description) => {
   return {div};
 }
 
-let taskArr = [];
-
-for (let i = 0; i < 20; i++) {
-  taskArr.push(task(`task${i}`, `desc${i}`));
+for (let i = 0; i < 3; i++) {
+  taskArr.push(task(`Groceries`, `Go for some grocery shopping!`));
 }
 
 export function displayTasks() {
+  // clear main content
   while (mainContent.firstChild) {
     mainContent.removeChild(mainContent.lastChild);
   }
   mainContent.appendChild(tasksContent)
+
+  // clear tasks content
+  while (tasksContent.firstChild) {
+    tasksContent.removeChild(tasksContent.lastChild);
+  }
+
+  // add contents of taskArr to tasks content
+  let index = 0;
   for (const arr of taskArr) {
+    arr.div.setAttribute('id', `${index}`);
     tasksContent.appendChild(arr.div);
+    index++;
   };
 }
 

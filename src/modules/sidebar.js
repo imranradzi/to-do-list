@@ -9,6 +9,8 @@ function sideBtn(name, func) {
   div.setAttribute('id', name);
   div.addEventListener('click', (e) => {
     func();
+    // adds sidebar-clicked class to clicked button
+    // which then highlights the button
     if (e.target == div) {
       for (const btn of sideBtnArr) {
         if (btn != div) {
