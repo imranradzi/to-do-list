@@ -21,11 +21,14 @@ const checkCircle = () => {
   return circle;
 }
 
+// to finish later
+/*
 function taskEdit(div) {
   console.log(`div id is ${div.getAttribute('id')}`);
   console.log('task edit button');
   displayTasks();
 }
+*/
 
 function taskDelete(div) {
   let left = taskArr.slice(0, parseInt(div.getAttribute('id')));
@@ -54,7 +57,7 @@ export const task = (name, description) => {
 
   const taskButtons = document.createElement('div');
   taskButtons.classList.add('task-buttons');
-  taskButtons.appendChild(button('edit', taskEdit, div));
+  // taskButtons.appendChild(button('edit', taskEdit, div));
   taskButtons.appendChild(button('delete', taskDelete, div));
   
   const nameDiv = document.createElement('div');
@@ -74,7 +77,7 @@ export const task = (name, description) => {
 }
 
 for (let i = 0; i < 3; i++) {
-  taskArr.push(task(`Groceries`, `Go for some grocery shopping!`));
+  taskArr.push(task(`task ${i}`, `desc`));
 }
 
 export function displayTasks() {
