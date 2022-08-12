@@ -18,3 +18,7 @@
   color: rgb(155, 194, 194);
   background-color: rgb(131, 131, 131);
 }
+
+.sidebar-clicked {
+  color: rgb(83, 204, 204);
+}

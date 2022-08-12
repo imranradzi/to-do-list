@@ -7,7 +7,17 @@ function sideBtn(name, func) {
   const div = document.createElement('div');
   div.textContent = name;
   div.setAttribute('id', name);
-  div.addEventListener('click', func);
+  div.addEventListener('click', (e) => {
+    func();
+    if (e.target == div) {
+      for (const btn of sideBtnArr) {
+        if (btn != div) {
+          btn.classList.remove('sidebar-clicked');
+        }
+      }
+      div.classList.add('sidebar-clicked');
+    };
+  });
   return div;
 }
 
