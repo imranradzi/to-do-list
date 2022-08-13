@@ -11,7 +11,7 @@
 #sidebar > div {
   margin-top: 20px;
   padding: 10px 30px;
-  border-radius: 0 90%;
+  border-radius: 0;
 }
 
 #sidebar > div:hover {

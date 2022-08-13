@@ -1,0 +1,37 @@
+#notes-content {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  gap: 2px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.note {
+  height: 8rem;
+  background-color: rgb(98, 146, 146);
+  overflow-y: auto;
+}
+
+.note::-webkit-scrollbar {
+  width: 8px;
+}
+
+.note::-webkit-scrollbar-track {
+  background-color: rgb(37, 37, 37);
+}
+
+.note::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 100px rgb(104, 104, 104);
+}
+
+.note-name {
+  padding: 10px 20px 0px 20px;
+  font-size: 0.8rem;
+}
+
+.note-description {
+  word-break: break-all;
+  padding: 10px 20px;
+  font-size: 0.6rem;
+  font-weight: lighter;
+}

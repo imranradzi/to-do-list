@@ -4,7 +4,7 @@ import '../styles/tasks.css';
 let taskArr = [];
 
 const tasksContent = document.createElement('div');
-tasksContent.setAttribute('id', 'tasks-content');;
+tasksContent.setAttribute('id', 'tasks-content');
 
 const checkCircle = () => {
   const circle = document.createElement('div');
@@ -31,8 +31,8 @@ function taskEdit(div) {
 */
 
 function taskDelete(div) {
-  let left = taskArr.slice(0, parseInt(div.getAttribute('id')));
-  let right = taskArr.slice(parseInt(div.getAttribute('id'))+1, taskArr.length);
+  let left = taskArr.slice(0, parseInt(div.getAttribute('data-taskid')));
+  let right = taskArr.slice(parseInt(div.getAttribute('data-taskid'))+1, taskArr.length);
   taskArr = left.concat(right);
   displayTasks();
 }
@@ -40,7 +40,7 @@ function taskDelete(div) {
 const button = (btnName, func, div) => {
   const btn = document.createElement('img');
   btn.setAttribute('src', `./svg/${btnName}.svg`);
-  btn.setAttribute('height', '24px');
+  btn.setAttribute('height', '18px');
   btn.addEventListener('click', () => {
     func(div);
   });
@@ -48,7 +48,7 @@ const button = (btnName, func, div) => {
   return btn;
 }
 
-export const task = (name, description) => {
+const task = (name, description) => {
   const div = document.createElement('div');
   div.classList.add('task');
 
@@ -85,7 +85,6 @@ export function displayTasks() {
   while (mainContent.firstChild) {
     mainContent.removeChild(mainContent.lastChild);
   }
-  mainContent.appendChild(tasksContent)
 
   // clear tasks content
   while (tasksContent.firstChild) {
@@ -95,9 +94,11 @@ export function displayTasks() {
   // add contents of taskArr to tasks content
   let index = 0;
   for (const arr of taskArr) {
-    arr.div.setAttribute('id', `${index}`);
+    arr.div.setAttribute('data-taskid', `${index}`);
     tasksContent.appendChild(arr.div);
     index++;
   };
+
+  mainContent.appendChild(tasksContent)
 }
 
