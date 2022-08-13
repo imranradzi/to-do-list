@@ -1,4 +1,4 @@
-import { mainContent } from "./dom";
+import { button, display, deleteBtn } from "./content";
 import '../styles/notes.css';
 
 let noteArr = [];
@@ -8,30 +8,26 @@ notesContent.setAttribute('id', 'notes-content');
 notesContent.textContent = 'notes go here';
 
 function noteDelete(div) {
-  let left = taskArr.slice(0, parseInt(div.getAttribute('data-noteid')));
-  let right = taskArr.slice(parseInt(div.getAttribute('data-noteid'))+1, noteArr.length);
-  noteArr = left.concat(right);
+  noteArr = deleteBtn('note', div, noteArr);
   displayNotes();
-}
-
-const button = (btnName, func, div) => {
-  const btn = document.createElement('img');
-  btn.setAttribute('src', `./svg/${btnName}.svg`);
-  btn.setAttribute('height', '18px');
-  btn.addEventListener('click', () => {
-    func(div);
-  });
-  
-  return btn;
 }
 
 const note = (name, description) => {
   const div = document.createElement('div');
   div.classList.add('note');
 
+  const noteButtons = document.createElement('div');
+  noteButtons.classList.add('note-buttons');
+  // noteButtons.appendChild(button('edit', noteEdit, div));
+  noteButtons.appendChild(button('delete', noteDelete, div));
+
+  const nameDivChild = document.createElement('div');
+  nameDivChild.textContent = name;
+
   const nameDiv = document.createElement('div');
   nameDiv.classList.add('note-name');
-  nameDiv.textContent = name;
+  nameDiv.appendChild(nameDivChild);
+  nameDiv.appendChild(noteButtons);
 
   const descDiv = document.createElement('div');
   descDiv.classList.add('note-description');
@@ -48,22 +44,5 @@ for (let i = 0; i < 5; i++) {
 }
 
 export function displayNotes() {
-  while (mainContent.firstChild) {
-    mainContent.removeChild(mainContent.lastChild);
-  }
-
-  // clear notes content
-  while (notesContent.firstChild) {
-    notesContent.removeChild(notesContent.lastChild);
-  }
-
-  // add contents of taskArr to tasks content
-  let index = 0;
-  for (const arr of noteArr) {
-    arr.div.setAttribute('data-noteid', `${index}`);
-    notesContent.appendChild(arr.div);
-    index++;
-  };
-
-  mainContent.appendChild(notesContent);
+  display('note', notesContent, noteArr);
 }

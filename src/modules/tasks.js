@@ -1,4 +1,4 @@
-import { mainContent } from "./dom";
+import { button, display, deleteBtn } from "./content";
 import '../styles/tasks.css';
 
 let taskArr = [];
@@ -31,21 +31,8 @@ function taskEdit(div) {
 */
 
 function taskDelete(div) {
-  let left = taskArr.slice(0, parseInt(div.getAttribute('data-taskid')));
-  let right = taskArr.slice(parseInt(div.getAttribute('data-taskid'))+1, taskArr.length);
-  taskArr = left.concat(right);
+  taskArr = deleteBtn('task', div, taskArr);
   displayTasks();
-}
-
-const button = (btnName, func, div) => {
-  const btn = document.createElement('img');
-  btn.setAttribute('src', `./svg/${btnName}.svg`);
-  btn.setAttribute('height', '18px');
-  btn.addEventListener('click', () => {
-    func(div);
-  });
-  
-  return btn;
 }
 
 const task = (name, description) => {
@@ -81,24 +68,6 @@ for (let i = 0; i < 3; i++) {
 }
 
 export function displayTasks() {
-  // clear main content
-  while (mainContent.firstChild) {
-    mainContent.removeChild(mainContent.lastChild);
-  }
-
-  // clear tasks content
-  while (tasksContent.firstChild) {
-    tasksContent.removeChild(tasksContent.lastChild);
-  }
-
-  // add contents of taskArr to tasks content
-  let index = 0;
-  for (const arr of taskArr) {
-    arr.div.setAttribute('data-taskid', `${index}`);
-    tasksContent.appendChild(arr.div);
-    index++;
-  };
-
-  mainContent.appendChild(tasksContent)
+  display('task', tasksContent, taskArr);
 }
 

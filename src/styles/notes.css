@@ -25,8 +25,20 @@
 }
 
 .note-name {
+  display: flex;
+  justify-content: space-between;
   padding: 10px 20px 0px 20px;
   font-size: 0.8rem;
+}
+
+.note-buttons > img {
+  cursor: pointer;
+  padding: 1px;
+  margin: 0;
+}
+
+.note-buttons > img:hover {
+  background-color: rgb(59, 59, 59);
 }
 
 .note-description {
