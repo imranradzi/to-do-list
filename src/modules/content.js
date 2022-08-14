@@ -141,13 +141,17 @@ document
   
     function deleteDiv(div) {
       if (contentType === 'note') {
-        localStorage.setItem('noteArr',
-        JSON.stringify(deleteBtn('note', div, noteArr)));
-        display('note', div.parentNode, noteArr);
+        localStorage.setItem('noteArray',
+        JSON.stringify(deleteBtn('note', div,
+        JSON.parse(localStorage.getItem('noteArray')))));
+        display('note', div.parentNode,
+        JSON.parse(localStorage.getItem('noteArray')));
       } else if (contentType === 'task') {
-        localStorage.setItem('taskArr',
-        JSON.stringify(deleteBtn('task', div, taskArr)));
-        display('task', div.parentNode, taskArr);
+        localStorage.setItem('taskArray',
+        JSON.stringify(deleteBtn('task', div,
+        JSON.parse(localStorage.getItem('taskArray')))));
+        display('task', div.parentNode,
+        JSON.parse(localStorage.getItem('taskArray')));
       }
     }
   
