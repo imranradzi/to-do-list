@@ -1,8 +1,8 @@
 import { header } from './dom';
 import '../styles/header.css';
 
-const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday',
-        'Friday', 'Saturday', 'Sunday'];
+const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday',
+        'Friday', 'Saturday'];
 
 const months = ['Jan', 'Feb', 'March', 'April', 'May',
                 'June', 'July', 'Aug', 'Sept', 'Oct',
@@ -17,7 +17,7 @@ export function showTime() {
   const time = document.createElement('div');
 
   time.setAttribute('id', 'time');
-  time.textContent =  `${days[day-1]} ${date} ${months[month]} ${year}`;
+  time.textContent =  `${days[day]} ${date} ${months[month]} ${year}`;
 
   header.appendChild(time);
 }
