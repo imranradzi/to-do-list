@@ -1,6 +1,9 @@
 import { mainContent, addContentDiv,addContentDesc, addContentName } from "./dom";
 import '../styles/content.css';
 
+export let noteArr = [];
+export let taskArr = [];
+
 export const button = (btnName, func, div) => {
   const btn = document.createElement('img');
   btn.setAttribute('src', `./svg/${btnName}.svg`);
@@ -11,6 +14,21 @@ export const button = (btnName, func, div) => {
   
   return btn;
 } 
+
+export const checkCircle = () => {
+  const circle = document.createElement('div');
+  circle.classList.add('check-circle');
+
+  circle.addEventListener('click', () => {
+    if (circle.classList.contains('circle-checked')) {
+      circle.classList.remove('circle-checked');
+    } else {
+      circle.classList.add('circle-checked');
+    }
+  });
+
+  return circle;
+}
 
 const addButtonDiv = document.createElement('div');
 addButtonDiv.setAttribute('id', 'plus');
@@ -35,6 +53,7 @@ export function display(contentName, contentDiv, contentArr) {
     index++;
   };
 
+  addButtonDiv.setAttribute('data-content', contentName);
   contentDiv.appendChild(addButtonDiv);
   mainContent.appendChild(contentDiv);
 }
@@ -47,12 +66,18 @@ export function deleteBtn(contentName, div, contentArr) {
   return newArr;
 }
 
+function removeContentValues() {
+  addContentName.value = '';
+  addContentDesc.value = '';
+}
+
 function showAddContent() {
   addContentDiv.style.display = 'flex';
 }
 
 function removeAddContent() {
   addContentDiv.style.display = 'none';
+  removeContentValues();
 }
 
 function getAddContentValues() {
@@ -60,18 +85,69 @@ function getAddContentValues() {
           addContentDesc.value];
 }
 
-function addContentToArr(arr, valueArr, contentMake) {
-  arr.push(contentMake(valueArr));
+function addContentToArr(contentType, arr) {
+  let itemName = getAddContentValues()[0];
+  let itemDesc = getAddContentValues()[1];
+  arr.push(contentItem(contentType, itemName, itemDesc));
 }
 
 document
   .querySelector('#add-content-close')
-  .addEventListener('click',removeAddContent);
+  .addEventListener('click', removeAddContent);
 
 document
   .querySelector('#add-content-check')
   .addEventListener('click', () => {
-    console.log(getAddContentValues());
+    let contentType = document
+                      .querySelector('#plus')
+                      .getAttribute('data-content');
+
+    if (contentType === 'note') {
+        addContentToArr(contentType, noteArr);
+        display('note', document.querySelector(`#${contentType}s-content`), noteArr);
+    } else if (contentType === 'task') {
+        addContentToArr(contentType, taskArr);
+        display('task', document.querySelector(`#${contentType}s-content`), taskArr)
+    }
+    
+    removeContentValues();
+    removeAddContent();
   });
 
+  export const contentItem = (contentType, name, description) => {
+    const div = document.createElement('div');
+    div.classList.add(`${contentType}`); // 
+  
+    const nameDivChild = document.createElement('div');
+    nameDivChild.textContent = name;
+  
+    function deleteDiv(div) {
+      if (contentType === 'note') {
+        noteArr = deleteBtn('note', div, noteArr);
+        display('note', div.parentNode, noteArr);
+      } else if (contentType === 'task') {
+        taskArr = deleteBtn('task', div, taskArr);
+        display('task', div.parentNode, taskArr);
+      }
+    }
+  
+    const buttons = document.createElement('div');
+    buttons.classList.add(`${contentType}-buttons`);
+    buttons.appendChild(button('delete', deleteDiv, div));
+  
+    const nameDiv = document.createElement('div');
+    nameDiv.classList.add(`${contentType}-name`);
+    nameDiv.appendChild(checkCircle());
+    nameDiv.appendChild(nameDivChild);
+    nameDiv.appendChild(buttons);
+  
+    const descDiv = document.createElement('div');
+    descDiv.classList.add(`${contentType}-description`);
+    descDiv.textContent = description;
+  
+    div.appendChild(nameDiv);
+    div.appendChild(descDiv);
+  
+    return {div};
+  }
 

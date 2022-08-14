@@ -3,7 +3,7 @@
   padding: 24px;
   height: 35vh;
   width: 30vw;
-  display: flex /*none*/;
+  display: none;
   flex-direction: column;
   justify-content: center;
   position: absolute;

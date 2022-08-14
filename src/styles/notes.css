@@ -12,6 +12,10 @@
   overflow-y: auto;
 }
 
+.note .check-circle {
+  display: none;
+}
+
 .note::-webkit-scrollbar {
   width: 8px;
 }
