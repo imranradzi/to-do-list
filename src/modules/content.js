@@ -1,8 +1,22 @@
 import { mainContent, addContentDiv,addContentDesc, addContentName } from "./dom";
 import '../styles/content.css';
 
-export let noteArr = [];
-export let taskArr = [];
+let noteArr = [{'name': 'Note 1',
+                      'description': 'Description 1'},
+                      {'name': 'Note 2',
+                      'description': 'Description 2'}];
+
+let taskArr = [{'name': 'Task 1',
+                        'description': 'Description 1'},
+                      {'name': 'Task 2',
+                        'description': 'Description 2'}];
+
+if (!localStorage.getItem('noteArray')) {
+  localStorage.setItem('noteArray', JSON.stringify(noteArr));
+}
+if (!localStorage.getItem('taskArray')) {
+  localStorage.setItem('taskArray', JSON.stringify(taskArr));
+}
 
 export const button = (btnName, func, div) => {
   const btn = document.createElement('img');
@@ -45,11 +59,13 @@ export function display(contentName, contentDiv, contentArr) {
     contentDiv.removeChild(contentDiv.lastChild);
   }
 
-  // add contents of content array to content div
+  // add contents of content array to content div 
   let index = 0;
-  for (const arr of contentArr) {
-    arr.div.setAttribute(`data-${contentName}id`, `${index}`);
-    contentDiv.appendChild(arr.div);
+  for (const content of
+    JSON.parse(localStorage.getItem(`${contentName}Array`))) {
+    let contentObj = contentItem(contentName, content['name'], content['description']);
+    contentObj.div.setAttribute(`data-${contentName}id`, `${index}`);
+    contentDiv.appendChild(contentObj.div);
     index++;
   };
 
@@ -85,10 +101,12 @@ function getAddContentValues() {
           addContentDesc.value];
 }
 
-function addContentToArr(contentType, arr) {
+function addContentToArr(contentType) {
   let itemName = getAddContentValues()[0];
   let itemDesc = getAddContentValues()[1];
-  arr.push(contentItem(contentType, itemName, itemDesc));
+  let arr = JSON.parse(localStorage.getItem(`${contentType}Array`));
+  arr.push({'name': itemName, 'description': itemDesc});
+  localStorage.setItem(`${contentType}Array`, JSON.stringify(arr));
 }
 
 document
@@ -123,10 +141,12 @@ document
   
     function deleteDiv(div) {
       if (contentType === 'note') {
-        noteArr = deleteBtn('note', div, noteArr);
+        localStorage.setItem('noteArr',
+        JSON.stringify(deleteBtn('note', div, noteArr)));
         display('note', div.parentNode, noteArr);
       } else if (contentType === 'task') {
-        taskArr = deleteBtn('task', div, taskArr);
+        localStorage.setItem('taskArr',
+        JSON.stringify(deleteBtn('task', div, taskArr)));
         display('task', div.parentNode, taskArr);
       }
     }
