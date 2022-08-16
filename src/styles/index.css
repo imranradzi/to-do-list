@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Krub:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
 
-html {
+html, body {
   position: relative;
   font-family: 'Krub', sans-serif;
   font-size: 2rem;
@@ -17,15 +17,10 @@ html {
   background-color: rgb(125, 158, 158);
 }
 
-body {
+#content {
   height: 75%;
   width: 60%;
   box-shadow: 0 0 20px black;
-}
-
-#content {
-  height: 100%;
-  width: 100%;
   display: grid;
   grid-template: 80px 1fr / 160px 1fr;
 }
@@ -62,4 +57,20 @@ header {
 
 #main-content > div {
   margin: auto;
+}
+
+footer {
+  width: 100%;
+  position: absolute; 
+  bottom: 0;
+}
+
+.links {
+  margin-right: 36px;
+  display: flex;
+  justify-content: end;
+}
+
+.links > div {
+  padding: 0 12px;
 }
