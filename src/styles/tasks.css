@@ -57,12 +57,12 @@
   margin-right: 24px;
 }
 
-.task-buttons > img {
+.task-buttons > input {
   cursor: pointer;
   padding: 1px;
   margin: 0px 8px;
 }
 
-.task-buttons > img:hover {
+.task-buttons > input:hover {
   background-color: rgb(59, 59, 59);
 }

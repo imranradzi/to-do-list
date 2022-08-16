@@ -35,13 +35,13 @@
   font-size: 0.8rem;
 }
 
-.note-buttons > img {
+.note-buttons > input {
   cursor: pointer;
   padding: 1px;
   margin: 0;
 }
 
-.note-buttons > img:hover {
+.note-buttons > input:hover {
   background-color: rgb(59, 59, 59);
 }
 

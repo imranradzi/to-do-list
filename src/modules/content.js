@@ -19,9 +19,10 @@ if (!localStorage.getItem('taskArray')) {
 }
 
 export const button = (btnName, func, div) => {
-  const btn = document.createElement('img');
+  const btn = document.createElement('input');
+  btn.setAttribute('type', 'image');
   btn.setAttribute('src', `./svg/${btnName}.svg`);
-  btn.setAttribute('height', '18px');
+  btn.setAttribute('height', '24px');
   btn.addEventListener('click', () => {
     func(div);
   });
@@ -30,7 +31,7 @@ export const button = (btnName, func, div) => {
 } 
 
 export const checkCircle = () => {
-  const circle = document.createElement('div');
+  const circle = document.createElement('button');
   circle.classList.add('check-circle');
 
   circle.addEventListener('click', () => {

@@ -19,7 +19,7 @@
   padding: 10px;
 }
 
-#add-content input,
+#add-content input[type='text'],
 #add-content textarea {
   font-size: 0.5rem;
   outline: none;
@@ -35,13 +35,13 @@
   align-items: center;
 }
 
-#add-content img {
+#add-content-buttons > input {
   margin: 0 24px;
   height: 36px;
   width: 36px;
 }
 
-#add-content img:hover {
+#add-content-buttons > input:hover {
   background-color: rgb(125, 158, 158);
 }
 
@@ -65,11 +65,11 @@
   width: 100%;
 }
 
-#plus img {
-  height: 36px;
-  width: 36px;
+#plus input {
+  height: 30px;
+  width: 30px;
 }
 
-#plus img:hover {
+#plus input:hover {
   background-color: rgb(125, 158, 158);
 }
