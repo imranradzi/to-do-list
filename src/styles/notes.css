@@ -7,9 +7,10 @@
 }
 
 .note {
+  overflow-y: auto;
   height: 10rem;
   background-color: rgb(98, 146, 146);
-  overflow-y: auto;
+  padding-bottom: 10px;
 }
 
 .note .check-circle {
@@ -29,15 +30,19 @@
 }
 
 .note-name {
+  background-color: rgb(73, 109, 109);
   display: flex;
+  position: sticky;
+  top: 0px;
   justify-content: space-between;
-  padding: 10px 20px 0px 20px;
+  padding: 5px 20px 5px 20px;
   font-size: 0.8rem;
 }
 
 .note-buttons > input {
+  display: flex;
   cursor: pointer;
-  padding: 1px;
+  padding-top: 6px;
   margin: 0;
 }
 
